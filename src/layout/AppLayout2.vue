@@ -60,18 +60,31 @@ const isOutsideClicked = (event) => {
 const openMenu1=ref()
 
 const toggleJalan=ref()
+const togglePelabuhan=ref()
+const togglePolygon=ref()
 </script>
 
 <template>
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
         <div class="layout-sidebar">
-            <app-sidebar @open-menu1="(Menu1)=>openMenu1=Menu1" @toggle-jalan="(res)=>toggleJalan=res"></app-sidebar>
+            <app-sidebar 
+                @open-menu1="(Menu1)=>openMenu1=Menu1" 
+                @toggle-jalan="(res)=>toggleJalan=res" 
+                @toggle-pelabuhan="(res)=>togglePelabuhan=res"
+                @toggle-polygon="(res)=>togglePolygon=res"
+                >
+            </app-sidebar>
         </div>
         <div class="layout-main-container">
             
                 <!-- <router-view></router-view> -->
-                <empty :open-menu1="openMenu1" :toggleJalan="toggleJalan" @close-menu1="(menu1Open)=>openMenu1=menu1Open"></empty>
+                <empty 
+                    :open-menu1="openMenu1" 
+                    :toggleJalan="toggleJalan"
+                    :togglePelabuhan="togglePelabuhan"
+                    :togglePolygon="togglePolygon"
+                    @close-menu1="(menu1Open)=>openMenu1=menu1Open"></empty>
             
             <app-footer></app-footer>
         </div>

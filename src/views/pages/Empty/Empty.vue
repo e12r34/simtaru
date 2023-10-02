@@ -23,14 +23,17 @@
     data() {
       return {
         map: null,
-        mapku:null
+        mapku:null,
+        marker:{}
         // visible:true
       };
     },
     emits: ['closeMenu1'],
     props:{
       openMenu1:Boolean,
-      toggleJalan:Boolean
+      toggleJalan:Boolean,
+      togglePelabuhan:Boolean,
+      togglePolygon:Boolean
     },
     components:{
       Menu1
@@ -173,13 +176,10 @@
               this.mapku.getCanvas().style.cursor = '';
             });
 
-            
-
+            // this.addMarker([130.804953, -0.431823],"tanda1")
             // End On load
         });
-        const marker = new maplibregl.Marker()
-            .setLngLat([130.814963, -0.423930])
-            .addTo(this.mapku);
+        
         // map.scrollZoom.disable();
         this.mapku.addControl(new maplibregl.NavigationControl());
         this.mapku.addControl(new maplibregl.FullscreenControl());
@@ -542,11 +542,132 @@
       removeLine(id){
           this.mapku.removeLayer(id);
           this.mapku.removeSource(id);
-      }
+      },
+      
+      addMarker(coordinates,id){
+        this.marker[id] = new maplibregl.Marker()
+            .setLngLat(coordinates)
+            .addTo(this.mapku);
+      },
+
+      removeMarker(id){
+        this.marker[id].remove();
+        delete this.marker[id]
+      },
+
+      addPolygon(){
+        this.mapku.addSource('polygon', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        // 'properties': {
+                        //     'color': '#F7455D' // red
+                        // },
+                        'geometry': {
+                            'type': 'Polygon',
+                            'coordinates': [
+                                        [
+                                          [
+                                            130.80576508064962,
+                                            -0.4300936441887018
+                                          ],
+                                          [
+                                            130.80668380283504,
+                                            -0.4292243401125404
+                                          ],
+                                          [
+                                            130.80766179741926,
+                                            -0.4285526050765611
+                                          ],
+                                          [
+                                            130.80701967976262,
+                                            -0.4281673452509125
+                                          ],
+                                          [
+                                            130.8065356218372,
+                                            -0.42772281465727247
+                                          ],
+                                          [
+                                            130.80625901730838,
+                                            -0.427377068622647
+                                          ],
+                                          [
+                                            130.80570580825076,
+                                            -0.42682387493576357
+                                          ],
+                                          [
+                                            130.80493526706323,
+                                            -0.4267942395578501
+                                          ],
+                                          [
+                                            130.80444133040442,
+                                            -0.4273276763312168
+                                          ],
+                                          [
+                                            130.80421411954256,
+                                            -0.42768330082616046
+                                          ],
+                                          [
+                                            130.80393751501379,
+                                            -0.42798953301664255
+                                          ],
+                                          [
+                                            130.80380909148272,
+                                            -0.4283550359374715
+                                          ],
+                                          [
+                                            130.80356212315257,
+                                            -0.4287106603848372
+                                          ],
+                                          [
+                                            130.80363127428478,
+                                            -0.4290366494464024
+                                          ],
+                                          [
+                                            130.80461914760235,
+                                            -0.42990595354399375
+                                          ],
+                                          [
+                                            130.80576508064962,
+                                            -0.4300936441887018
+                                          ]
+                                        ]
+                                      ]
+                        }
+                      }
+                    ]
+            }
+            
+      });
+        
+          this.mapku.addLayer({
+              'id': 'polygon',
+              'type': 'fill',
+              'source': 'polygon',
+              'layout': {},
+              'paint': {
+                  'fill-color': '#088',
+                  'fill-opacity': 0.8
+              }
+          });
+      },
+      removePolygon(id){
+          this.mapku.removeLayer(id);
+          this.mapku.removeSource(id);
+      },
     },
     watch:{
       toggleJalan: function(news,old){
         news?this.drawLine():this.removeLine('lines')
+      },
+      togglePelabuhan: function(news,old){
+        news?this.addMarker([130.804953, -0.431823],'pelabuhan'):this.removeMarker('pelabuhan')
+      },
+      togglePolygon: function(news,old){
+        news?this.addPolygon():this.removePolygon('polygon')
       }
     },
     beforeDestroy() {

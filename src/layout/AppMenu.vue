@@ -4,8 +4,10 @@ import { ref, onMounted } from 'vue';
 // import AppMenuItem from './AppMenuItem.vue';
 
 
-const emit=defineEmits(['openMenu1','toggleJalan'])
+const emit=defineEmits(['openMenu1','toggleJalan','togglePelabuhan','togglePolygon'])
 const tampilkanJalanWaisai=ref(false)
+const tampilkanPelabuhan=ref(false)
+const tampilkanPolygon=ref(false)
 
 function openMenu1() {
     emit('openMenu1',true)
@@ -14,6 +16,16 @@ function openMenu1() {
 function toggleJalan() {
     tampilkanJalanWaisai.value=!tampilkanJalanWaisai.value
     emit('toggleJalan', tampilkanJalanWaisai.value)
+}
+
+function togglePelabuhan() {
+    tampilkanPelabuhan.value=!tampilkanPelabuhan.value
+    emit('togglePelabuhan', tampilkanPelabuhan.value)
+}
+
+function togglePolygon() {
+    tampilkanPolygon.value=!tampilkanPolygon.value
+    emit('togglePolygon', tampilkanPolygon.value)
 }
 
 // import { library } from '@fortawesome/fontawesome-free'
@@ -72,6 +84,19 @@ onMounted(() => {
             </ul>
         </li>
         <li class="layout-root-menuitem">
+            <div class="layout-menuitem-root-text"> Kecamatan</div>
+            <ul class="layout-submenu">
+                <li @click="togglePolygon()">
+                    <a tabindex="0">
+                        <font-awesome-icon icon="fa fa-area-chart" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            Kecamatan X
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="layout-root-menuitem">
             <div class="layout-menuitem-root-text"> Bandara</div>
             <ul class="layout-submenu">
                 <li>
@@ -91,7 +116,7 @@ onMounted(() => {
         <li class="layout-root-menuitem">
             <div class="layout-menuitem-root-text"> Pelabuhan</div>
             <ul class="layout-submenu">
-                <li>
+                <li @click="togglePelabuhan()">
                     <a tabindex="0">
                         <!-- <i class="pi pi-directions layout-menuitem-icon">
 
