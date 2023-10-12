@@ -103,9 +103,9 @@ import VirtualScroller from 'primevue/virtualscroller';
 import BlockViewer from '@/components/BlockViewer.vue';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faPlane, faHospital, faAnchor, faHotel, faRoad, faEye, faEyeSlash, faMapMarker, faMountain, faAreaChart } from '@fortawesome/free-solid-svg-icons' // Import the correct icon
+import { faPlane, faHospital, faAnchor, faHotel, faRoad, faEye, faEyeSlash, faMapMarker, faMountain, faAreaChart, faCity, faHouse } from '@fortawesome/free-solid-svg-icons' // Import the correct icon
 
-library.add(faPlane, faHospital, faAnchor, faHotel, faRoad, faEye, faEyeSlash, faMapMarker, faMountain, faAreaChart) // Add the correct icon to the library
+library.add(faPlane, faHospital, faAnchor, faHotel, faRoad, faEye, faEyeSlash, faMapMarker, faMountain, faAreaChart, faCity, faHouse) // Add the correct icon to the library
 
 import '@/assets/styles.scss';
 

@@ -58,13 +58,13 @@
                         'id': 'simple-tiles',
                         'type': 'raster',
                         'source': 'raster-tiles',
-                        'minzoom': 13,
+                        'minzoom': 1,
                         'maxzoom': 21
                     }
                 ]
             },
             maxZoom: 20,
-            minZoom: 13,
+            minZoom: 1,
             center: [130.814963, -0.423930], // starting position
             zoom: 15 // starting zoom
         });

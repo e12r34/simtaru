@@ -42,6 +42,70 @@ onMounted(() => {
 <template>
     <ul class="layout-menu">
         <li class="layout-root-menuitem">
+            <div class="layout-menuitem-root-text"> Foto Udara</div>
+            <ul class="layout-submenu">
+                <li>
+                    <a @click="toggleJalan" tabindex="0">
+                        <font-awesome-icon icon="fa fa-city" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            Kabupaten Waisai
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a @click="openMenu1()" tabindex="0">
+                        <font-awesome-icon icon="fa fa-city" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            Kabupaten B
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a tabindex="0">
+                        <font-awesome-icon icon="fa fa-city" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            Kabupaten C
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="layout-root-menuitem">
+            <div class="layout-menuitem-root-text"> Kecamatan</div>
+            <ul class="layout-submenu">
+                <li @click="togglePolygon()">
+                    <a tabindex="0">
+                        <font-awesome-icon icon="fa fa-area-chart" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            Kecamatan X
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="layout-root-menuitem">
+            <div class="layout-menuitem-root-text"> RTRW</div>
+            <ul class="layout-submenu">
+                <li @click="togglePolygon()">
+                    <a tabindex="0">
+                        <font-awesome-icon icon="fa fa-house" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            RTRW 1
+                        </span>
+                    </a>
+                </li>
+
+                <li @click="togglePolygon()">
+                    <a tabindex="0">
+                        <font-awesome-icon icon="fa fa-house" class="layout-menuitem-icon" />
+                        <span class="layout-menuitem-text">
+                            RTRW 2
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="layout-root-menuitem">
             <div class="layout-menuitem-root-text"> Jalan</div>
             <ul class="layout-submenu">
                 <li>
@@ -83,19 +147,7 @@ onMounted(() => {
                 </li>
             </ul>
         </li>
-        <li class="layout-root-menuitem">
-            <div class="layout-menuitem-root-text"> Kecamatan</div>
-            <ul class="layout-submenu">
-                <li @click="togglePolygon()">
-                    <a tabindex="0">
-                        <font-awesome-icon icon="fa fa-area-chart" class="layout-menuitem-icon" />
-                        <span class="layout-menuitem-text">
-                            Kecamatan X
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
         <li class="layout-root-menuitem">
             <div class="layout-menuitem-root-text"> Bandara</div>
             <ul class="layout-submenu">
