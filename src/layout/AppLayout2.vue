@@ -62,6 +62,7 @@ const openMenu1=ref()
 const toggleJalan=ref()
 const togglePelabuhan=ref()
 const togglePolygon=ref()
+const toggleWaisai=ref()
 </script>
 
 <template>
@@ -73,6 +74,7 @@ const togglePolygon=ref()
                 @toggle-jalan="(res)=>toggleJalan=res" 
                 @toggle-pelabuhan="(res)=>togglePelabuhan=res"
                 @toggle-polygon="(res)=>togglePolygon=res"
+                @toggle-waisai="(res)=>toggleWaisai=res"
                 >
             </app-sidebar>
         </div>
@@ -84,6 +86,7 @@ const togglePolygon=ref()
                     :toggleJalan="toggleJalan"
                     :togglePelabuhan="togglePelabuhan"
                     :togglePolygon="togglePolygon"
+                    :toggleWaisai="toggleWaisai"
                     @close-menu1="(menu1Open)=>openMenu1=menu1Open"></empty>
             
             <app-footer></app-footer>

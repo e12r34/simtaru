@@ -33,7 +33,8 @@
       openMenu1:Boolean,
       toggleJalan:Boolean,
       togglePelabuhan:Boolean,
-      togglePolygon:Boolean
+      togglePolygon:Boolean,
+      toggleWaisai:Boolean
     },
     components:{
       Menu1
@@ -71,13 +72,13 @@
 
         this.mapku.on('load', () => {
           
-          // source raster waisai
-          this.mapku.addSource('waisai-raster', {
-            'type': 'raster',
-            'tiles': ['http://10.12.20.203:8000/services/original1/tiles/{z}/{x}/{y}.png'], 
-            'tileSize': 256 
+          // // source raster waisai
+          // this.mapku.addSource('waisai-raster', {
+          //   'type': 'raster',
+          //   'tiles': ['http://localhost:8000/services/original1/tiles/{z}/{x}/{y}.png'], 
+          //   'tileSize': 256 
             
-          });
+          // });
           
           this.mapku.addSource('places', {
                 'type': 'geojson',
@@ -129,12 +130,12 @@
             );
             
 
-            this.mapku.addLayer({
-            'id': 'waisai-raster-layer', 
-            'type': 'raster', 
-            'source': 'waisai-raster',
-            'paint': {}
-          });
+          //   this.mapku.addLayer({
+          //   'id': 'waisai-raster-layer', 
+          //   'type': 'raster', 
+          //   'source': 'waisai-raster',
+          //   'paint': {}
+          // });
 
 
             // Add a layer showing the places.
@@ -544,6 +545,33 @@
           this.mapku.removeSource(id);
       },
       
+
+      addFotoUdara(){
+                  // source raster waisai
+          this.mapku.addSource('waisai-raster', {
+            'type': 'raster',
+            'tiles': ['http://localhost:8000/services/original1/tiles/{z}/{x}/{y}.png'], 
+            'tileSize': 256 
+            
+          });
+          
+
+
+            this.mapku.addLayer({
+            'id': 'waisai-raster', 
+            'type': 'raster', 
+            'source': 'waisai-raster',
+            'paint': {}
+          });
+      },
+
+      removeFotoUdara(){
+        const id='waisai-raster'
+        this.mapku.removeLayer(id);
+        this.mapku.removeSource(id);
+        
+      },
+
       addMarker(coordinates,id){
         this.marker[id] = new maplibregl.Marker()
             .setLngLat(coordinates)
@@ -668,6 +696,9 @@
       },
       togglePolygon: function(news,old){
         news?this.addPolygon():this.removePolygon('polygon')
+      },
+      toggleWaisai: function(news,old){
+        news?this.addFotoUdara():this.removeFotoUdara()
       }
     },
     beforeDestroy() {

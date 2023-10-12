@@ -4,10 +4,11 @@ import { ref, onMounted } from 'vue';
 // import AppMenuItem from './AppMenuItem.vue';
 
 
-const emit=defineEmits(['openMenu1','toggleJalan','togglePelabuhan','togglePolygon'])
+const emit=defineEmits(['openMenu1','toggleJalan','togglePelabuhan','togglePolygon','toggleWaisai'])
 const tampilkanJalanWaisai=ref(false)
 const tampilkanPelabuhan=ref(false)
 const tampilkanPolygon=ref(false)
+const tampilkanWaisai=ref(false)
 
 function openMenu1() {
     emit('openMenu1',true)
@@ -15,7 +16,7 @@ function openMenu1() {
 
 function toggleJalan() {
     tampilkanJalanWaisai.value=!tampilkanJalanWaisai.value
-    emit('toggleJalan', tampilkanJalanWaisai.value)
+    emit('toggleJalanWaisai', tampilkanJalanWaisai.value)
 }
 
 function togglePelabuhan() {
@@ -26,6 +27,11 @@ function togglePelabuhan() {
 function togglePolygon() {
     tampilkanPolygon.value=!tampilkanPolygon.value
     emit('togglePolygon', tampilkanPolygon.value)
+}
+
+function toggleWaisai() {
+    tampilkanWaisai.value=!tampilkanWaisai.value
+    emit('toggleWaisai', tampilkanWaisai.value)
 }
 
 // import { library } from '@fortawesome/fontawesome-free'
@@ -45,7 +51,7 @@ onMounted(() => {
             <div class="layout-menuitem-root-text"> Foto Udara</div>
             <ul class="layout-submenu">
                 <li>
-                    <a @click="toggleJalan" tabindex="0">
+                    <a @click="toggleWaisai" tabindex="0">
                         <font-awesome-icon icon="fa fa-city" class="layout-menuitem-icon" />
                         <span class="layout-menuitem-text">
                             Kabupaten Waisai
