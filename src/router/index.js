@@ -145,7 +145,7 @@ const router = createRouter({
             ]
         },
         {
-            path: '/2',
+            path: '/map',
             component: AppLayout2,
         },
         {
