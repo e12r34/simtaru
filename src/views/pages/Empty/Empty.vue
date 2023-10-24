@@ -150,6 +150,10 @@
                 }
             });
             
+            // this.mapku.on('click', 'lines',(e)=>{
+            //   console.log(e)
+            //   console.log(e.features)
+            // })
             this.mapku.on('click', 'places', (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const description = e.features[0].properties.description;
@@ -550,7 +554,7 @@
                   // source raster waisai
           this.mapku.addSource('waisai-raster', {
             'type': 'raster',
-            'tiles': ['http://localhost:8000/services/original1/tiles/{z}/{x}/{y}.png'], 
+            'tiles': ['http://10.12.20.203:8000/services/original1/tiles/{z}/{x}/{y}.png'], 
             'tileSize': 256 
             
           });

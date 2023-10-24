@@ -1,45 +1,55 @@
 <template>
-    <div class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
-      <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
-        <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+    <!-- <div class="bg-cover md:bg-contain bg-center h-64 w-64" style="background-image: url('/layout/images/bg.png');"> -->
+      
+  <!-- Content goes here -->
+<!-- </div> -->
+<!-- <div class="absolute"> -->
+<!-- </div> -->
+<div class="">
+  <div class="absolute middle w-6" style="margin-top: 10%; margin-left: 28%;">
+    <div class="grid">
+      <div class="col-2">
+        <img src='/layout/images/rajaampat.gif' class="w-10">
       </div>
-      <div class="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu" aria-hidden="true">
-        <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+      <div class="col-10">
+        <h3 style="margin-bottom: -0.5em;"><b class="text-orange-400">SISTEM INFORMASI TATA RUANG</b></h3>
+        <h3 class="text-white">Pemerintah Kabupaten Raja Ampat</h3>
+        <p class="text-white">Jalan Raya Waisai, Waisai, Distrik Kota Waisai, Kabupaten Raja Ampat, Papua Bar. 98482</p>
       </div>
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:mx-0">
-          <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Work with us</h2>
-          <p class="mt-6 text-lg leading-8 text-gray-300">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
-        </div>
-        <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-            <a v-for="link in links" :key="link.name" :href="link.href">{{ link.name }} <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <dl class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-            <div v-for="stat in stats" :key="stat.name" class="flex flex-col-reverse">
-              <dt class="text-base leading-7 text-gray-300">{{ stat.name }}</dt>
-              <dd class="text-2xl font-bold leading-9 tracking-tight text-white">{{ stat.value }}</dd>
-            </div>
-          </dl>
-        </div>
+      <div class="col-12" style="margin-top: -2em;">
+        <hr class="border-b-1 border-gray-300 my-2 block">
       </div>
+      <div class="col-12">
+        <h1 class="text-white text-7xl">Jelajahi Kabupaten Raja Ampat</h1>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-6">
+        <Button size="large" @click="goMain" rounded>Jelajahi Sekarang</Button>
+      </div>
+      <div class="col-3"></div>
+      
     </div>
-  </template>
-  
-  <script setup>
-  const links = [
-    { name: 'Open roles', href: '#' },
-    { name: 'Internship program', href: '#' },
-    { name: 'Our values', href: '#' },
-    { name: 'Meet our leadership', href: '#' },
-  ]
-  const stats = [
-    { name: 'Offices worldwide', value: '12' },
-    { name: 'Full-time colleagues', value: '300+' },
-    { name: 'Hours per week', value: '40' },
-    { name: 'Paid time off', value: 'Unlimited' },
-  ]
-  </script>
+  </div>
+</div>
 
-  <style></style>
+  
+</template>
+  
+<script setup>
+import { useRouter } from 'vue-router';
+const router=useRouter()
+
+function goMain() {
+  router.push({path:'/map'})
+}
+</script>
+
+<style module>
+body {
+  background-image: url('/layout/images/bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+</style>

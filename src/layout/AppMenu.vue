@@ -16,7 +16,7 @@ function openMenu1() {
 
 function toggleJalan() {
     tampilkanJalanWaisai.value=!tampilkanJalanWaisai.value
-    emit('toggleJalanWaisai', tampilkanJalanWaisai.value)
+    emit('toggleJalan', tampilkanJalanWaisai.value)
 }
 
 function togglePelabuhan() {
@@ -115,7 +115,7 @@ onMounted(() => {
             <div class="layout-menuitem-root-text"> Jalan</div>
             <ul class="layout-submenu">
                 <li>
-                    <a @click="toggleJalan" tabindex="0">
+                    <a @click="toggleJalan()" tabindex="0">
                         <font-awesome-icon icon="fa fa-road" class="layout-menuitem-icon" />
                         <span class="layout-menuitem-text">
                             Jalan Raya Waisai
