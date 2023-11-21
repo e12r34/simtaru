@@ -39,7 +39,7 @@
 import { useRouter } from 'vue-router';
 const router=useRouter()
 
-function goMain() {
+async function goMain() {
   router.push({path:'/map'})
 }
 </script>

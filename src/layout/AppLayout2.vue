@@ -96,4 +96,9 @@ const toggleWaisai=ref()
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.layout-main-container {
+    background-color: #fff !important;
+}
+</style>

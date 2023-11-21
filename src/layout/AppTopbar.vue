@@ -19,7 +19,7 @@ onBeforeUnmount(() => {
 
 const logoUrl = computed(() => {
     // return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
-    return `layout/images/rajaampat.gif`;
+    return `layout/images/raj.png`;
 });
 
 const onTopBarMenuButton = () => {
@@ -93,4 +93,9 @@ const isOutsideClicked = (event) => {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.layout-topbar {
+    background-color: #ffa701 !important;
+}
+
+</style>

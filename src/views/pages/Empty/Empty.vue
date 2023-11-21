@@ -2,6 +2,18 @@
     <div class="body">
       
       <div ref="map" id="map"></div>
+      <Button @click="toggle" class="p-button p-button-secondary mr-2 mb-2"> Legenda</Button>
+      <OverlayPanel ref="op" appendTo="body" :showCloseIcon="false">
+        <Tree 
+          v-model:selectionKeys="selectedKey" 
+          :value="nodes" 
+          selectionMode="checkbox" 
+          class="w-full md:w-30rem"
+          @nodeSelect="onNodeSelect"
+          @nodeUnselect="onNodeUnselect"
+          />
+      </OverlayPanel>
+      <pre id="info"></pre>
       <!-- <Button @click="isMenu1Open=!isMenu1Open" class="btn">Tombol</Button> -->
     </div>
     
@@ -24,7 +36,10 @@
       return {
         map: null,
         mapku:null,
-        marker:{}
+        marker:{},
+        nodes:null,
+        selectedKey: null
+        // op:null
         // visible:true
       };
     },
@@ -40,6 +55,11 @@
       Menu1
     },
     mounted(){
+      // NodeService.getTreeNodes().then((data) => (console.log(data)));
+      this.getTreeNodes().then((data)=>{
+        this.nodes = data
+        console.log(data)
+      })
       this.mapku = new maplibregl.Map({
             container: this.$refs.map, // container id
             style: {
@@ -64,14 +84,19 @@
                     }
                 ]
             },
-            maxZoom: 20,
-            minZoom: 1,
+            maxZoom: 21,
+            minZoom: 13,
             center: [130.814963, -0.423930], // starting position
             zoom: 15 // starting zoom
         });
 
+        
+        this.mapku.addControl(new maplibregl.ScaleControl());
+        this.mapku.on('mousemove', (e) => {
+          document.getElementById('info').innerHTML =
+          `Posisi Mouse: ${e.lngLat.lng}, ${e.lngLat.lat}`
+          });
         this.mapku.on('load', () => {
-          
           // // source raster waisai
           // this.mapku.addSource('waisai-raster', {
           //   'type': 'raster',
@@ -180,9 +205,6 @@
             this.mapku.on('mouseleave', 'places', () => {
               this.mapku.getCanvas().style.cursor = '';
             });
-
-            // this.addMarker([130.804953, -0.431823],"tanda1")
-            // End On load
         });
         
         // map.scrollZoom.disable();
@@ -190,10 +212,59 @@
         this.mapku.addControl(new maplibregl.FullscreenControl());
     },
     methods: {
+      onNodeSelect(selected){
+        if(selected.children){
+          selected.children.forEach(element => {
+            this.addGeojson(element)
+          });
+        }
+        else{
+          this.addGeojson(selected)
+          
+        }
+      },
+      onNodeUnselect(unselected){
+        if (unselected.children) {
+          unselected.children.forEach(element => {
+            this.removeGeojson(element)
+          });
+        }
+        else{
+          this.removeGeojson(unselected)
+        } 
+      },
+      getTreeNodes() {
+        return fetch('http://localhost:5000/api/simtaru')
+            .then((res) => res.json())
+            .then((d) => d.root);
+      },
+      toggle(event) {
+        this.$refs.op.toggle(event);
+      },
       closeMenu1(close){
         this.$emit('closeMenu1',close)
       },
+      addGeojson(selected){
+        this.mapku.addSource(selected.data, {
+            'type': 'geojson',
+            'data': `http://localhost:5000/api/simtaru/${selected.parent}/${selected.data}`
+          });
 
+          this.mapku.addLayer({
+                  'id': `${selected.data}`,
+                  'type': 'fill',
+                  'source': `${selected.data}`,
+                  'paint': {
+                    'fill-color': '#2b0575',
+                    'fill-opacity': 0.8
+                  }
+
+              })
+      },
+      removeGeojson(unselected){
+          this.mapku.removeLayer(unselected.data);
+          this.mapku.removeSource(unselected.data);
+      },
       drawLine(){
         this.mapku.addSource('lines', {
             'type': 'geojson',
@@ -554,7 +625,7 @@
                   // source raster waisai
           this.mapku.addSource('waisai-raster', {
             'type': 'raster',
-            'tiles': ['http://10.12.20.203:8000/services/original1/tiles/{z}/{x}/{y}.png'], 
+            'tiles': ['https://apisimtaru.kartabhumi.co.id/services/original1/tiles/{z}/{x}/{y}.png'], 
             'tileSize': 256 
             
           });
@@ -715,5 +786,31 @@
   
 <style>
     .body { margin: 0; padding: 0; }
-    #map { position: absolute; left:0; top: 10%; bottom: 0; width: 100%; height:90%; }
+    #map { position: absolute; left:0; top: 9%; bottom: 0; width: 100%; height:88%; }
+
+    #info {
+      display: table;
+      position: absolute;
+      margin: 0px auto;
+      word-wrap: anywhere;
+      white-space: pre-wrap;
+      margin-top: 36.5%;
+      /* padding: 10px; */
+      padding-bottom: 5px;
+      border: none;
+      border-radius: 3px;
+      font-size: 12px;
+      text-align: center;
+      color: #222;
+      background: #fff;
+    }
+    .custom-control-button {
+      background-color: white;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 10px;
+    }
 </style>
